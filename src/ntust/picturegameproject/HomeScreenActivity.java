@@ -1,16 +1,31 @@
 package ntust.picturegameproject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class HomeScreenActivity extends Activity {
-
+	Button startBtn;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_screen);
+		startBtn = (Button) this.findViewById(R.id.startBtn);
+		startBtn.setOnClickListener(new Button.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent data = new Intent(HomeScreenActivity.this, GameScreenActivity.class);
+				startActivity(data);
+				
+				//startActivityForResult(data, REQUEST_CODE);
+			}});
 	}
 
 	@Override

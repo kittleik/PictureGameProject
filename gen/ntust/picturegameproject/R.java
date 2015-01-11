@@ -23,12 +23,32 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int life0=0x7f020001;
+        public static final int life1=0x7f020002;
+        public static final int life10=0x7f020003;
+        public static final int life2=0x7f020004;
+        public static final int life3=0x7f020005;
+        public static final int life4=0x7f020006;
+        public static final int life5=0x7f020007;
+        public static final int life6=0x7f020008;
+        public static final int life7=0x7f020009;
+        public static final int life8=0x7f02000a;
+        public static final int life9=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int action_settings=0x7f080008;
+        public static final int lifeImageView=0x7f080002;
+        public static final int lifeTextView=0x7f080003;
+        public static final int playBtn=0x7f080004;
+        public static final int rightBtn=0x7f080005;
+        public static final int startBtn=0x7f080007;
+        public static final int survivalTimeText=0x7f080001;
+        public static final int textView1=0x7f080000;
+        public static final int wrongBtn=0x7f080006;
     }
     public static final class layout {
-        public static final int activity_home_screen=0x7f030000;
+        public static final int activity_game_screen=0x7f030000;
+        public static final int activity_home_screen=0x7f030001;
     }
     public static final class menu {
         public static final int home_screen=0x7f070000;
