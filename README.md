@@ -1,2 +1,0 @@
-# PictureGameProject
-NTUST game project
