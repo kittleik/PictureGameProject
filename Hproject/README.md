@@ -1,2 +1,2 @@
-# PictureGameProject
+# PictureGameProject Håvard
 NTUST game project
