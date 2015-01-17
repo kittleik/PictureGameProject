@@ -2,6 +2,7 @@ package ntust.picturegameproject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,7 +20,10 @@ public class GameScreenActivity extends Activity {
 	private static final int MAX_NUM_OF_LIFE = 10;
 	private static final int UPDATE_FREQUENCY = 50;
 	
+	private static final int REQUEST_CODE = 10;
+	
 	private static int life = 10;
+	private static int time = 0;
 	
 	Button playBtn, rightBtn, wrongBtn;
 	TextView survivalTimeText;
@@ -90,7 +94,7 @@ public class GameScreenActivity extends Activity {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			int time = Integer.parseInt(survivalTimeText.getText().toString());
+			time = Integer.parseInt(survivalTimeText.getText().toString());
 			survivalTimeText.setText("" + (time + 1));
 			if(time % TIME_INTERVAL - 4 == 0 && life > 0){
 				life--;
@@ -110,6 +114,7 @@ public class GameScreenActivity extends Activity {
 			if(life == 0){
 				Toast.makeText(getApplicationContext(), "Finished !", Toast.LENGTH_SHORT).show();
 				finish();
+				gameLose();
 			}
 			else
 				mainHandler.postDelayed(updateLifeImage, UPDATE_FREQUENCY);
@@ -117,12 +122,20 @@ public class GameScreenActivity extends Activity {
 		
 	};
 	
+	private void gameLose() {
+		Intent data = new Intent(GameScreenActivity.this, GameLoseScreenActivity.class);
+		startActivity(data);
+		data.putExtra("survivalTime", ""+(time+1));
+		startActivityForResult(data, REQUEST_CODE);
+	}
+	
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
 		mainHandler.removeCallbacks(updateStopThread);
 		mainHandler.removeCallbacks(updateLifeImage);
-	}
-	
+	}	
 }
+
+
