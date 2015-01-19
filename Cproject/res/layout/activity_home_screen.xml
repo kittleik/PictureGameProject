@@ -16,4 +16,25 @@
         android:layout_centerVertical="true"
         android:text="Start" />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/startBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="84dp"
+        android:text="The Highest Score："
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/highestScoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/textView1"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>

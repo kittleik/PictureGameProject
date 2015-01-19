@@ -1,17 +1,13 @@
 package ntust.picturegameproject;
 
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,7 +17,7 @@ public class GameLoseScreenActivity extends Activity {
 	
 	private final static String fileName = "score.txt";
 	
-	Button homepageBtn, addBtn, readBtn;
+	Button homepageBtn;
 	TextView scoreText;
 	String value;
 	
@@ -32,9 +28,6 @@ public class GameLoseScreenActivity extends Activity {
 		setContentView(R.layout.activity_game_lose_screen);
 		
 		homepageBtn = (Button) this.findViewById(R.id.homepageBtn);
-		addBtn = (Button) this.findViewById(R.id.addBtn);
-		readBtn = (Button) this.findViewById(R.id.readBtn);
-		
 		
 		Intent data = this.getIntent();
 		value = data.getExtras().getString("survivalTime");
@@ -42,6 +35,8 @@ public class GameLoseScreenActivity extends Activity {
 			Toast.makeText(getApplicationContext(), "OK !", Toast.LENGTH_SHORT).show();
 			scoreText = (TextView) this.findViewById(R.id.scoreText);
 			scoreText.setText(value);
+			if(Integer.parseInt(value) > Integer.parseInt(readScoreFromFile(fileName)))
+				writeIntoFile(value);
 		}
 		
 		homepageBtn.setOnClickListener(new Button.OnClickListener(){
@@ -54,50 +49,40 @@ public class GameLoseScreenActivity extends Activity {
 				startActivity(data);
 			}});
 		
-		addBtn.setOnClickListener(new Button.OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				//getDir(fileName, Context.MODE_PRIVATE);
-				try{
-					FileOutputStream writer = openFileOutput(fileName, Context.MODE_PRIVATE);
-					writer.write(value.getBytes());
-					writer.close();
-				}catch (FileNotFoundException e) {
-				    e.printStackTrace();
-				  } catch (IOException e) {
-				    e.printStackTrace();
-				  }
-				
-			}});
-		
-		readBtn.setOnClickListener(new Button.OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				String result = null;
-				  try {
-				    StringBuilder sb = new StringBuilder();
-				    FileInputStream fin = openFileInput(fileName);
-				    byte[] data = new byte[fin.available()];
-				    while (fin.read(data) != -1) {
-				      sb.append(new String(data));
-				    }
-				    fin.close();
-				    result = sb.toString();
-				  } catch (FileNotFoundException e) {
-				    e.printStackTrace();
-				  } catch (IOException e) {
-				    e.printStackTrace();
-				  }
-				  Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
- 
-			}});
-		
 	}
 
+	private void writeIntoFile(String value) {
+		try{
+			FileOutputStream writer = openFileOutput(fileName, Context.MODE_PRIVATE);
+			writer.write(value.getBytes());
+			writer.close();
+		}catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		  } catch (IOException e) {
+		    e.printStackTrace();
+		  }
+	}
 	
+	private String readScoreFromFile(String fileName) {
+		String result = null;
+		  try {
+		    StringBuilder sb = new StringBuilder();
+		    FileInputStream fin = openFileInput(fileName);
+		    byte[] data = new byte[fin.available()];
+		    while (fin.read(data) != -1) {
+		      sb.append(new String(data));
+		    }
+		    fin.close();
+		    result = sb.toString();
+		  } catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		  } catch (IOException e) {
+		    e.printStackTrace();
+		  }
+		  if(result != null)
+			  return result;
+		  else
+			  return "0";
+	}
 
 }
